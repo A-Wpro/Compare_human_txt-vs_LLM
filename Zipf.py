@@ -20,7 +20,6 @@ filtered_words = [word for word in words if word not in stop_words and word.isal
 
 # Calculate word frequency
 word_freq = Counter(filtered_words)
-
 # Create a DataFrame with words and their frequencies
 df = pd.DataFrame(word_freq.items(), columns=['Word', 'Frequency'])
 
@@ -31,10 +30,10 @@ df = df.sort_values(by='Frequency', ascending=False)
 df['Rank'] = df['Frequency'].rank(method='min', ascending=False)
 
 # Plot Zipf's distribution using Plotly Express
-fig = px.scatter(df, x='Rank', y='Frequency', log_x=True, log_y=True, text='Word')
+fig = px.line(df, x='Rank', y='Frequency', log_x=True, log_y=True)
 fig.update_traces(textposition='top center')
 fig.update_layout(
-    title="Zipf's Distribution Plot",
+    title="Zipf's Distribution Plot of input data",
     xaxis_title="Rank",
     yaxis_title="Frequency",
     showlegend=False,
